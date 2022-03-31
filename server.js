@@ -4,7 +4,7 @@ const app = express();
 const db = require('./db');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const user = require('./models/User');
+const userModel = require('./models/User');
 db();
 
 dotenv.config();
@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cors());
 app.post('/user/register', async (req, res) => {
-	const newUser = await user.create({
+	const newUser = await userModel.create({
 		username: haythem,
 		password: 1234,
 		firstName: hay,
@@ -28,9 +28,9 @@ app.post('/user/register', async (req, res) => {
 	} else {
 		console.log('failed');
 	}
-	const body = req.body;
-	console.log(body);
-});
+	const {username,password,firstName,lastName,dateOfBirth,email,telephone,gender} = req.body;
+
+	
 app.get('/user/list', (req, res) => {
 	console.log('message1');
 	res.send('list');
