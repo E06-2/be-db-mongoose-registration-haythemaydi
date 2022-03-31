@@ -29,7 +29,13 @@ app.post('/user/register', async (req, res) => {
 		console.log('failed');
 	}
 	const {username,password,firstName,lastName,dateOfBirth,email,telephone,gender} = req.body;
-
+const userCheck=userModel.findOne({username,password,firstName,lastName,dateOfBirth,email,telephone,gender},(err,doc){
+	if(err){
+		res.status(400).send('wrong cridential')
+	}else{
+		res.status(200).send('registered')
+	}
+})
 	
 app.get('/user/list', (req, res) => {
 	console.log('message1');
