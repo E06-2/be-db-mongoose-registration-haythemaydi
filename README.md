@@ -6,13 +6,13 @@ This assignment will allow to practise building the database structure for a reg
 
 This project will allow you to practise using:
 
-> - Connecting to a MongoDB database
-> - Writing a schema for a MongoDB database with Mongoose
+> -   Connecting to a MongoDB database
+> -   Writing a schema for a MongoDB database with Mongoose
 
 This project assumes you've already had experience with:
 
-> - using a .env file
-> - creating express endpoints
+> -   using a .env file
+> -   creating express endpoints
 
 ## Tasks
 
@@ -44,12 +44,12 @@ Note: For this assignment, we already assume you have a MongoDB server, and know
     ```shell script
     npm install dotenv
     ```
-   
+
 2. Inside `server.js`, import the `dotenv` module with the following code:
 
     ```javascript
     const dotenv = require('dotenv');
-    
+
     dotenv.config();
     ```
 
@@ -66,25 +66,25 @@ We will install `mongoose` and connect it to our database
 1. Install `mongoose`
 
     ```shell script
-    npm install 
-    ``` 
-   
+    npm install
+    ```
+
 2. Import `mongoose` into `server.js` using the `require` function
 
 3. Use the `connect` method from `mongoose` to connect to your database
 
     ```javascript
-     mongoose.connect()
+    mongoose.connect();
     ```
-   
+
 4. The `connect` method needs the URL of your database to connect to (as a string). Pass into the `connect` method all the correct parameters which should now be accessible to you via the `process.env` global variable. You can use the following code as an example (you will have to fill in the correct parameters as marked by {} from your own `process.env` properties):
 
     ```javascript
-    mongoose
-        .connect(
-            'mongodb+srv://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}?retryWrites=true&w=majority')
+    mongoose.connect(
+    	'mongodb+srv://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}?retryWrites=true&w=majority'
+    );
     ```
-   
+
 ## Task 4 - Let's test our DB connection
 
 The `mongoose.connect()` method returns a promise, which we can use to determine if the connection with the database went ok or not.
@@ -93,7 +93,7 @@ The `mongoose.connect()` method returns a promise, which we can use to determine
 
 2. Use the `catch` promise method (meaning the promise was rejected) to display a message that connecting to our database failed, in our `console`
 
-3. Test your code by running it. What message do you see in the `console`? 
+3. Test your code by running it. What message do you see in the `console`?
 
 ## Task 5 - Creating a registration endpoint
 
@@ -104,15 +104,16 @@ Now we've connected our database, we want to build an endpoint which will allow 
     ```shell script
     npm install express
     ```
-   
+
 2. Import `express` into `server.js` using the `require` function
 
 3. Create an endpoint inside `server.js`. It should:
+
     - listen for a `POST` request (we want to receive data)
     - use the path `/user/register`
     - don't forget `response.send()`
-   
-   > Bonus: Use Express routing instead to create a Route for `/user`
+
+    > Bonus: Use Express routing instead to create a Route for `/user`
 
 4. Make a call to `app.listen()` to allow the server to start listening for incoming connections. We will use port `3001`.
 
@@ -142,9 +143,9 @@ Edit the file `models/User.js`.
     telephone
     gender
     ```
-    
+
     `dateOfBirth` should be of type `Date`
-    
+
     The rest should be of type `String`
 
 ## Task 7 - Adding validation to the "UserSchema" schema
@@ -152,10 +153,11 @@ Edit the file `models/User.js`.
 All values **except** for `telephone` and gender should be `required`
 
 `gender` should have an `enum` validation. It should accept only the strings:
-   - `'Male'`
-   - `'Female'`
-   - `'Other'`
-   - `'N/A'`
+
+-   `'Male'`
+-   `'Female'`
+-   `'Other'`
+-   `'N/A'`
 
 `gender` should default to the string `'N/A'`
 
@@ -185,7 +187,7 @@ For now, we will use dummy data. Later we will use real data posted to the API.
 
     ```javascript
     const newUser = await User.create({
-       firstName: 'Franco'
+    	userN
     });
     ```
 
@@ -210,9 +212,9 @@ Before we can do this, we must prepare our application to receive data.
 
 1. Install the cors middleware package
 
-   ```shell script
-   npm install cors
-   ```
+    ```shell script
+    npm install cors
+    ```
 
 2. Add the middleware `express.json()` and `cors()` to your server application
 
@@ -231,6 +233,7 @@ Once you are happy with your test, move onto the next assignment.
 1. Take the `body` parameters from the POST request, and map them into the object you created for your `User` constructor - replacing the dummy data you previously used
 
 2. Move your `response.send()` into the promise methods `then` and `catch` (or `try` and `catch` if you are using these instead).
+
     - It should return a status code of `200` if the promise resolves
     - It should return a status code of `400` if the promise rejects
 
@@ -241,18 +244,19 @@ Test your application using your API testing tool.
 ## Task 13 - Get all users with GET /user/list
 
 1. Create an endpoint inside `server.js`. It should:
-   - listen for a `GET` request (we want to receive data from the server)
-   - use the path `/user/list`
-   - don't forget `response.send()`
 
-   > Bonus: Use Express routing instead to create a Route for `/user`
+    - listen for a `GET` request (we want to receive data from the server)
+    - use the path `/user/list`
+    - don't forget `response.send()`
+
+    > Bonus: Use Express routing instead to create a Route for `/user`
 
 2. Inside the handler for the `/user/list` endpoint, use the method `User.find()` to get all the users saved in the database
-   - `User.find()` returns a `Promise` so treat it as such
-   - Return the results to the user
+    - `User.find()` returns a `Promise` so treat it as such
+    - Return the results to the user
 
 # Bonus Tasks
-   
+
 ## Bonus 1 - Build a frontend for the POST /user/register request
 
 Build a frontend which will make the `POST` requests you were previously testing with your API testing tool.
@@ -267,5 +271,5 @@ Build a frontend which will make the `POST` requests you were previously testing
     - email
     - telephone
     - gender
-    
+
     There should be a button to `Submit` the form
